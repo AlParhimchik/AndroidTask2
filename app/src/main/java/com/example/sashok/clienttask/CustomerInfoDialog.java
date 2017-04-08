@@ -75,10 +75,6 @@ public class CustomerInfoDialog extends AlertDialog  {
             }
         }
     }
-    public static float dipToPixels(Context context, float dipValue){
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,  dipValue, metrics);
-    }
 
     public void addToView(View main_view,String text){
         root_layout=(LinearLayout)main_view.findViewById(R.id.root_layout);
