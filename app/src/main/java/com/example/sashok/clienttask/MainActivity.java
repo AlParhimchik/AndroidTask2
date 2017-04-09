@@ -26,7 +26,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     ProgressBar progressBar;
     RecyclerView recyclerView;
-    customerAdapter adapter;
+    CustomerAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,25 +58,27 @@ public class MainActivity extends AppCompatActivity {
                                         try {
                                             customer=new Customer();
                                             customer_object = customers_list.getJSONObject(i);
-                                            if (customer_object.has("id")) customer.customer_id = customer_object.getInt("id");
-                                            if (customer_object.has("firstName")) customer.firstName = customer_object.getString("firstName");
-                                            if (customer_object.has("lastName")) customer.lastName = customer_object.getString("lastName");
-                                            if (customer_object.has("email")) customer.email=customer_object.getString("email");
+                                            customer.setCustomerId(customer_object.has("id") ? customer_object.getInt("id"):0);
+                                            customer.setManagerId(customer_object.has("managerId") ? customer_object.getInt("managerId"):0);
+
+                                            customer.setFirstName(customer_object.has("firstName") ? customer_object.getString("firstName"): "");
+                                            customer.setLastName(customer_object.has("lastName") ? customer_object.getString("lastName"): "");
+                                            customer.setEmail(customer_object.has("email") ? customer_object.getString("email") : "") ;
                                             if (customer_object.has("phones")) {
                                                 phones = customer_object.getJSONArray("phones");
-                                                customer.phones = new ArrayList<>();
+                                                customer.initPhones();
                                                 for (int j = 0; j < phones.length(); j++) {
-                                                    customer.phones.add(phones.getJSONObject(j).getString("number"));
+                                                    customer.getPhones().add(phones.getJSONObject(j).getString("number"));
                                                 }
                                             }
-                                            if (customer_object.has("vip")) customer.vip = customer_object.getBoolean("vip");
-                                            if (customer_object.has("bad")) customer.bad = customer_object.getBoolean("bad");
-                                            if (customer_object.has("site")) customer.site = customer_object.getString("site");
+                                            customer.setVip(customer_object.has("vip") ? customer_object.getBoolean("vip") : null);
+                                            customer.setBad(customer_object.has("bad") ? customer_object.getBoolean("bad") : null);
+                                            customer.setSite(customer_object.has("site") ? customer_object.getString("site"): "");
                                             if (customer_object.has("createdAt")) {
                                                 String date = customer_object.getString("createdAt");
                                                 java.text.DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                                                 try {
-                                                    customer.createDate = format.parse(date);
+                                                    customer.setCreateDate(format.parse(date));
                                                 } catch (Exception e) {
 
                                                 }
@@ -109,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void wordReceived(List<Customer> customers){
-        adapter = new customerAdapter(MainActivity.this, customers);
+        adapter = new CustomerAdapter(MainActivity.this, customers);
         recyclerView.setAdapter(adapter);
         recyclerView.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.INVISIBLE);

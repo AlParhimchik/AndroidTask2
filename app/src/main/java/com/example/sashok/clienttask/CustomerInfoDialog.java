@@ -1,29 +1,13 @@
 package com.example.sashok.clienttask;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Handler;
-import android.support.v4.content.ContextCompat;
-import android.text.InputType;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -48,28 +32,28 @@ public class CustomerInfoDialog extends AlertDialog  {
         final View view = inflater.inflate(R.layout.customer_info, null);
         setView(view);
         example_textView=(TextView)view.findViewById(R.id.textview);
-        example_textView.setText("id: "+customer.customer_id);
+        example_textView.setText("id: "+ customer.getCustomerId());
         String name="";
-        if (customer.firstName!=null) name=customer.firstName;
-        if (customer.lastName!=null) name+=" "+customer.lastName;
+        if (customer.getFirstName() !=null) name= customer.getFirstName();
+        if (customer.getLastName() !=null) name+=" "+ customer.getLastName();
         setTitle("Информация о "+name);
         setValues(view);
     }
 
 
     public void setValues(final View view) {
-        if (customer.site != null) addToView(view, "site" + customer.site);
-        if (customer.vip != null) addToView(view, "vip: " + customer.vip);
-        if (customer.bad != null) addToView(view, "bad: " + customer.bad);
-        if (customer.email != null) addToView(view, "email: " + customer.email);
-        if (customer.createDate != null) {
+        if (customer.getSite() != null) addToView(view, "site" + customer.getSite());
+        if (customer.getVip() != null) addToView(view, "vip: " + customer.getVip());
+        if (customer.getBad() != null) addToView(view, "bad: " + customer.getBad());
+        if (customer.getEmail() != null) addToView(view, "email: " + customer.getEmail());
+        if (customer.getCreateDate() != null) {
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String reportDate = df.format(customer.createDate);
+            String reportDate = df.format(customer.getCreateDate());
             addToView(view, "date: " + reportDate);
         }
-        if (customer.manager_id != 0) addToView(view, "managerId: " + customer.manager_id);
-        if (customer.phones.size() != 0) {
-            for (String phone : customer.phones
+        if (customer.getManagerId() != 0) addToView(view, "managerId: " + customer.getManagerId());
+        if (customer.getPhones().size() != 0) {
+            for (String phone : customer.getPhones()
                     ) {
                 addToView(view, "phone: " + phone);
             }

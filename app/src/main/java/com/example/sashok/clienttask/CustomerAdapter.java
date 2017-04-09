@@ -4,18 +4,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by sashok on 7.4.17.
  */
 
-public class customerAdapter extends RecyclerView.Adapter<customerAdapter.MyHolder> {
+public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyHolder> {
     private MainActivity activity;
     public List<Customer> customers;
     @Override
@@ -26,7 +24,7 @@ public class customerAdapter extends RecyclerView.Adapter<customerAdapter.MyHold
     }
 
 
-    public  customerAdapter(MainActivity activity, List<Customer> customers){
+    public CustomerAdapter(MainActivity activity, List<Customer> customers){
         this.activity = activity;
         this.customers=customers;
     }
@@ -44,10 +42,10 @@ public class customerAdapter extends RecyclerView.Adapter<customerAdapter.MyHold
     @Override
     public void onBindViewHolder(final MyHolder holder, int position) {
         final Customer customer  = customers.get(position);
-        String name="";
-        if (customer.firstName!=null) name=customer.firstName;
-        if (customer.lastName!=null) name+=" "+customer.lastName;
-         holder.customer_name.setText(name);
+        String name;
+        name=(customer.getFirstName() !=null? customer.getFirstName() : "");
+        name+=" "+ (customer.getLastName() !=null ? customer.getLastName() : "");
+        holder.customer_name.setText(name);
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
