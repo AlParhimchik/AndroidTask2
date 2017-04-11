@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ClientTask</string>
+    <string name="title">Тестовое задание </string>
+    <string name="edit_word_btn">Сохранить</string>
+    <string name="change_title">Изменить</string>
+    <string name="cancel">Отменить</string>
 </resources>

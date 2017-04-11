@@ -1,5 +1,8 @@
 package com.example.sashok.clienttask;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -93,19 +96,47 @@ public class Customer {
     }
 
     public List<String> getPhones() {
+
         return phones;
     }
 
     public void setPhones(List<String> phones) {
         this.phones = phones;
     }
-    public void initPhones()
-    {
-        this.phones=new ArrayList<>();
+
+
+    public void initPhones() {
+        this.phones = new ArrayList<>();
     }
 
     @Override
     public String toString() {
-        return super.toString();
+
+        String costumer="";
+        costumer+=(getFirstName()!=null?"firstName "+getFirstName()+"\n":"");
+        costumer+=(getCustomerId()!=0?"id "+getCustomerId()+"\n":"");
+        costumer+=(getLastName()!=null?"lastName "+getLastName()+"\n":"");
+        costumer+=(getSite()!=null?"site "+getSite()+"\n":"");
+        costumer+=(getEmail()!=null?"email "+getEmail()+"\n":"");
+        costumer+=(getBad()!=null?"bad "+getBad()+"\n":"");
+        costumer+=(getVip()!=null?"vip "+getVip()+"\n":"");
+        String phones="";
+        if (getPhones().size()!=0){
+            for (int i=0;i<getPhones().size()-1;i++) {
+                phones+=getPhones().get(i)+",";
+
+
+            }
+            phones+=getPhones().get(getPhones().size()-1);
+            costumer+="phones "+phones+"\n";
+        }
+        if (getCreateDate()!=null) {
+
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String reportDate = df.format(getCreateDate());
+            costumer +="createDate " + reportDate + "\n";
+        }
+        costumer+=(getManagerId()!=0?"managerId "+getManagerId():"");
+        return costumer;
     }
 }
