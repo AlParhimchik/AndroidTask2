@@ -144,7 +144,7 @@ public class CustomerEditDialog extends AlertDialog implements View.OnFocusChang
         root_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hideKeyboard(root);
+                edit_name.requestFocus();
             }
         });
         edit_field = (EditText) root.findViewById(R.id.edit_field);
@@ -168,7 +168,7 @@ public class CustomerEditDialog extends AlertDialog implements View.OnFocusChang
     public void onFocusChange(View view, boolean b) {
         if (!b) {
             hideKeyboard(view);
-            edit_field.requestFocus();
+            edit_name.requestFocus();
         }
     }
 
@@ -185,12 +185,12 @@ public class CustomerEditDialog extends AlertDialog implements View.OnFocusChang
                 jObject = new JSONObject(response);
             } catch (JSONException e) {
                 e.printStackTrace();
-                Toast.makeText(ctx,"ServerError",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ctx, "ServerError", Toast.LENGTH_SHORT).show();
             }
-            boolean resp ; // get data object
+            boolean resp;
             try {
                 resp = jObject.getBoolean("success");
-                Toast.makeText(ctx, resp==true?"200. OK":"something vrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ctx, resp == true ? "200. OK" : "something vrong", Toast.LENGTH_SHORT).show();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -239,7 +239,7 @@ public class CustomerEditDialog extends AlertDialog implements View.OnFocusChang
                             jsonBody.put("email", customer.getEmail());
                             DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                             String reportDate = df.format(customer.getCreateDate());
-                            jsonBody.put("createdAt",reportDate);
+                            jsonBody.put("createdAt", reportDate);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
