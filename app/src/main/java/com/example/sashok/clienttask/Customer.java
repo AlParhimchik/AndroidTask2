@@ -22,6 +22,10 @@ public class Customer {
     private Date createDate;
     private List<String> phones;
 
+    public Customer() {
+        phones = new ArrayList<>();
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -103,39 +107,38 @@ public class Customer {
         this.phones = phones;
     }
 
+    public String showInformation() {
+        String costumer = "";
+        costumer += (getFirstName() != null ? "firstName " + getFirstName() + "\n" : "");
+        costumer += (getCustomerId() != 0 ? "id " + getCustomerId() + "\n" : "");
+        costumer += (getLastName() != null ? "lastName " + getLastName() + "\n" : "");
+        costumer += (getSite() != null ? "site " + getSite() + "\n" : "");
+        costumer += (getEmail() != null ? "email " + getEmail() + "\n" : "");
+        costumer += (getBad() != null ? "bad " + getBad() + "\n" : "");
+        costumer += (getVip() != null ? "vip " + getVip() + "\n" : "");
+        String phones = "";
+        if (getPhones().size() != 0) {
+            for (int i = 0; i < getPhones().size() - 1; i++) {
+                phones += getPhones().get(i) + ",";
 
-    public void initPhones() {
-        this.phones = new ArrayList<>();
+
+            }
+            phones += getPhones().get(getPhones().size() - 1);
+            costumer += "phones " + phones + "\n";
+        }
+        if (getCreateDate() != null) {
+
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String reportDate = df.format(getCreateDate());
+            costumer += "createDate " + reportDate + "\n";
+        }
+        costumer += (getManagerId() != 0 ? "managerId " + getManagerId() : "");
+        return costumer;
+
     }
 
     @Override
     public String toString() {
-
-        String costumer="";
-        costumer+=(getFirstName()!=null?"firstName "+getFirstName()+"\n":"");
-        costumer+=(getCustomerId()!=0?"id "+getCustomerId()+"\n":"");
-        costumer+=(getLastName()!=null?"lastName "+getLastName()+"\n":"");
-        costumer+=(getSite()!=null?"site "+getSite()+"\n":"");
-        costumer+=(getEmail()!=null?"email "+getEmail()+"\n":"");
-        costumer+=(getBad()!=null?"bad "+getBad()+"\n":"");
-        costumer+=(getVip()!=null?"vip "+getVip()+"\n":"");
-        String phones="";
-        if (getPhones().size()!=0){
-            for (int i=0;i<getPhones().size()-1;i++) {
-                phones+=getPhones().get(i)+",";
-
-
-            }
-            phones+=getPhones().get(getPhones().size()-1);
-            costumer+="phones "+phones+"\n";
-        }
-        if (getCreateDate()!=null) {
-
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String reportDate = df.format(getCreateDate());
-            costumer +="createDate " + reportDate + "\n";
-        }
-        costumer+=(getManagerId()!=0?"managerId "+getManagerId():"");
-        return costumer;
+        return super.toString();
     }
 }

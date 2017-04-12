@@ -107,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
                                     customer.setEmail(customer_object.has("email") ? customer_object.getString("email") : "");
                                     if (customer_object.has("phones")) {
                                         phones = customer_object.getJSONArray("phones");
-                                        customer.initPhones();
                                         for (int j = 0; j < phones.length(); j++) {
                                             customer.getPhones().add(phones.getJSONObject(j).getString("number"));
                                         }

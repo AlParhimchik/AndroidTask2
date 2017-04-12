@@ -33,7 +33,7 @@ public class CustomerInfoDialog extends AlertDialog {
         if (customer.getFirstName() != null) name = customer.getFirstName();
         if (customer.getLastName() != null) name += " " + customer.getLastName();
         setTitle("Информация о " + name);
-        example_textView.setText(customer.toString());
+        example_textView.setText(customer.showInformation());
     }
 
 }
